@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->uuid()->unique();
             $table->string('name');
+            $table->string('login')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('confirmed_email')->default(false);
@@ -22,6 +24,8 @@ return new class extends Migration
             $table->integer("qtd_tentativa")->default(0);
             $table->rememberToken();
             $table->timestamps();
+            $table->string("created_by", 255);
+            $table->string("updated_by", 255);
         });
     }
 

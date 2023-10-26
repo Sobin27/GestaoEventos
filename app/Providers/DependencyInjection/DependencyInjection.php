@@ -1,8 +1,5 @@
 <?php
-
-
 namespace App\Providers\DependencyInjection;
-
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Collection;
@@ -20,7 +17,9 @@ abstract class DependencyInjection
 
     public static function providers(Application $app): Collection
     {
-        return collect([ ]);
+        return collect([
+            new LoginDi($app)
+        ]);
     }
 
     public function configure()
