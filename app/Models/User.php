@@ -1,16 +1,31 @@
 <?php
-
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Traits\ArraySerializer;
+use App\Core\Traits\ArraySerializer;
+use App\Events\CreateNewUser;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject
+/**
+ * @property string $id
+ * @property string $uuid
+ * @property string $email
+ * @property string $login
+ * @property string $name
+ * @property bool $confirmed_email
+ * @property string $email_verified_at
+ * @property string $created_at
+ * @property string $created_by
+ * @property string $updated_at
+ * @property string $updated_by
+ * @property bool $ativo
+ */
+class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable,ArraySerializer;
 
@@ -64,4 +79,11 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+    public function userPassword(): HasOne
+    {
+        return $this->hasOne(UserPassword::class, 'user_id', 'id');
+    }
+    protected $dispatchesEvents = [
+        'created' => CreateNewUser::class,
+    ];
 }

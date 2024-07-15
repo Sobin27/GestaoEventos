@@ -1,10 +1,9 @@
 <?php
-
-namespace App\Traits;
+namespace App\Core\Traits;
 
 trait ArraySerializer
 {
-    public function toArray()
+    public function toArray(): array
     {
         $array = [];
         foreach($this as $key => $property) {
