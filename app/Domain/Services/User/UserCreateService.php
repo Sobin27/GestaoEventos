@@ -3,6 +3,7 @@ namespace App\Domain\Services\User;
 
 use App\Core\Infra\Database\Repository\User\IUserCreateRepository;
 use App\Core\Infra\Database\Repository\User\IVerifyIfEmailExistsRepository;
+use App\Core\Infra\Database\Repository\User\IVerifyIfLoginExistsRepository;
 use App\Core\Service\User\IUserCreateService;
 use App\Http\Requests\User\UserCreateRequest;
 use Exception;
@@ -13,6 +14,7 @@ class UserCreateService implements IUserCreateService
     public function __construct(
         private readonly IVerifyIfEmailExistsRepository $verifyIfEmailExistsRepository,
         private readonly IUserCreateRepository $userCreateRepository,
+        private readonly IVerifyIfLoginExistsRepository $verifyIfLoginExistsRepository,
     )
     { }
 
@@ -23,6 +25,7 @@ class UserCreateService implements IUserCreateService
     {
         $this->setRequest($request);
         $this->checkIfEmailExists();
+        $this->checkIfLoginExists();
         return $this->insertUser();
     }
     private function setRequest(UserCreateRequest $request): void
@@ -36,6 +39,15 @@ class UserCreateService implements IUserCreateService
     {
         if ($this->verifyIfEmailExistsRepository->verifyIfEmailExists($this->request->email)) {
             throw new Exception('Email already exists');
+        }
+    }
+    /**
+     * @throws Exception
+     */
+    private function checkIfLoginExists(): void
+    {
+        if ($this->verifyIfLoginExistsRepository->checkIfLoginExists($this->request->login)) {
+            throw new Exception('Login already exists');
         }
     }
     private function insertUser(): bool
