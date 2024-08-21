@@ -81,7 +81,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     }
     public function userPassword(): HasOne
     {
-        return $this->hasOne(UserPassword::class, 'user_id', 'id');
+        return $this->hasOne(UserPassword::class);
     }
     protected $dispatchesEvents = [
         'created' => CreateNewUser::class,

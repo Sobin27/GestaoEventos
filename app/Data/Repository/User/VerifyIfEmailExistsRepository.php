@@ -6,7 +6,7 @@ use App\Models\User;
 
 class VerifyIfEmailExistsRepository implements IVerifyIfEmailExistsRepository
 {
-    public function verifyIfEmailExists(string $email): bool
+    public function verifyIfEmailExists(string|null $email): bool
     {
         return User::query()->where('email', $email)->exists();
     }

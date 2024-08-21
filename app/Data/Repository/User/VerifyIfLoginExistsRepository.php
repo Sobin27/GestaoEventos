@@ -7,7 +7,7 @@ use App\Models\User;
 class VerifyIfLoginExistsRepository implements IVerifyIfLoginExistsRepository
 {
 
-    public function checkIfLoginExists(string $login): bool
+    public function checkIfLoginExists(string|null $login): bool
     {
         return User::query()->where('login', $login)->exists();
     }
