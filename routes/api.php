@@ -17,5 +17,6 @@ Route::middleware('jwt')->group(function (){
     });
     Route::prefix('event')->group(function (){
         Route::post('create', [EventController::class, 'createEvent'])->name('create.event');
+        Route::post('to-participate/{eventId}', [EventController::class, 'toParticipateEvent'])->name('to-participate.eventId');
     });
 });

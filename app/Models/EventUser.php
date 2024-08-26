@@ -12,10 +12,10 @@ class EventUser extends Model
 {
     use HasFactory;
 
-    protected $table = 'event_user';
+    protected $table = 'events_participants';
     protected $fillable = [
         'event_id',
-        'user_id',
+        'participant_id',
     ];
 
 }
