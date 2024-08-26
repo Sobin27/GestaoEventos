@@ -4,6 +4,7 @@ namespace App\Domain\Services\Event;
 use App\Core\Repository\Event\IEventToParticipateRepository;
 use App\Core\Repository\Event\IVerifyHowManyParticipantsEventRepository;
 use App\Core\Repository\Event\IVerifyIfEventIsPublicRepository;
+use App\Core\Repository\Event\IVerifyIfEventIsStillActiveRepository;
 use App\Core\Service\Event\IEventToParticipateService;
 use Exception;
 
@@ -13,6 +14,7 @@ class EventToParticipateService implements IEventToParticipateService
         private readonly IVerifyHowManyParticipantsEventRepository $verifyHowManyParticipantsEventRepository,
         private readonly IVerifyIfEventIsPublicRepository $verifyIfEventIsPublicRepository,
         private readonly IEventToParticipateRepository $eventToParticipateRepository,
+        private readonly IVerifyIfEventIsStillActiveRepository $verifyIfEventIsStillActiveRepository,
     )
     { }
 
@@ -23,6 +25,7 @@ class EventToParticipateService implements IEventToParticipateService
     {
         $this->checkIfEventHasVacancies($eventId);
         $this->checkIfEventIsPublic($eventId);
+        $this->checkIfEventIsStillActive($eventId);
         return $this->eventToParticipateRepository->toParticipateEvent($eventId);
     }
     /**
@@ -42,6 +45,15 @@ class EventToParticipateService implements IEventToParticipateService
     {
         if (!$this->verifyIfEventIsPublicRepository->verifyIfEventIsPublic($eventId)) {
             throw new Exception('Event is not public');
+        }
+    }
+    /**
+     * @throws Exception
+     */
+    private function checkIfEventIsStillActive(int $eventId): void
+    {
+        if (!$this->verifyIfEventIsStillActiveRepository->verifyIfEventIsStillActive($eventId)) {
+            throw new Exception('Event is not active');
         }
     }
 }
