@@ -1,7 +1,7 @@
 <?php
-namespace App\Data\Repository\User;
+namespace App\Data\User;
 
-use App\Core\Infra\Database\Repository\User\IUserCreateRepository;
+use App\Core\Repository\User\IUserCreateRepository;
 use App\Http\Requests\User\UserCreateRequest;
 use App\Models\User;
 use App\Models\UserPassword;

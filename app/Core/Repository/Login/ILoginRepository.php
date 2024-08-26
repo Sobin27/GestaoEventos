@@ -1,5 +1,5 @@
 <?php
-namespace App\Core\Infra\Database\Repository\Login;
+namespace App\Core\Repository\Login;
 
 use App\Http\Requests\Login\LoginRequest;
 

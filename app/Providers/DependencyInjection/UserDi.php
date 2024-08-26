@@ -1,23 +1,23 @@
 <?php
 namespace App\Providers\DependencyInjection;
 
-use App\Core\Infra\Database\Repository\User\IFindUserByUuidRepository;
-use App\Core\Infra\Database\Repository\User\IUserConfirmedEmailRepository;
-use App\Core\Infra\Database\Repository\User\IUserCreateRepository;
-use App\Core\Infra\Database\Repository\User\IUserUpdateRepository;
-use App\Core\Infra\Database\Repository\User\IVerifyIfCredentialsIsCorrectRepository;
-use App\Core\Infra\Database\Repository\User\IVerifyIfEmailExistsRepository;
-use App\Core\Infra\Database\Repository\User\IVerifyIfLoginExistsRepository;
+use App\Core\Repository\User\IFindUserByUuidRepository;
+use App\Core\Repository\User\IUserConfirmedEmailRepository;
+use App\Core\Repository\User\IUserCreateRepository;
+use App\Core\Repository\User\IUserUpdateRepository;
+use App\Core\Repository\User\IVerifyIfCredentialsIsCorrectRepository;
+use App\Core\Repository\User\IVerifyIfEmailExistsRepository;
+use App\Core\Repository\User\IVerifyIfLoginExistsRepository;
 use App\Core\Service\User\IUserConfirmEmailService;
 use App\Core\Service\User\IUserCreateService;
 use App\Core\Service\User\IUserUpdateService;
-use App\Data\Repository\User\FindUserByUuidRepository;
-use App\Data\Repository\User\UserConfirmedEmailRepository;
-use App\Data\Repository\User\UserCreateRepository;
-use App\Data\Repository\User\UserUpdateRepository;
-use App\Data\Repository\User\VerifyIfCredentialsIsCorrectRepository;
-use App\Data\Repository\User\VerifyIfEmailExistsRepository;
-use App\Data\Repository\User\VerifyIfLoginExistsRepository;
+use App\Data\User\FindUserByUuidRepository;
+use App\Data\User\UserConfirmedEmailRepository;
+use App\Data\User\UserCreateRepository;
+use App\Data\User\UserUpdateRepository;
+use App\Data\User\VerifyIfCredentialsIsCorrectRepository;
+use App\Data\User\VerifyIfEmailExistsRepository;
+use App\Data\User\VerifyIfLoginExistsRepository;
 use App\Domain\Services\User\UserConfirmEmailService;
 use App\Domain\Services\User\UserCreateService;
 use App\Domain\Services\User\UserUpdateService;

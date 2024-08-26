@@ -1,10 +1,10 @@
 <?php
 namespace App\Providers\DependencyInjection;
 
-use App\Core\Infra\Database\Repository\Login\ILoginRepository;
+use App\Core\Repository\Login\ILoginRepository;
 use App\Core\Service\Login\ILoginService;
 use App\Core\Service\Login\ILogoutService;
-use App\Data\Repository\Login\LoginRepository;
+use App\Data\Login\LoginRepository;
 use App\Domain\Services\Login\LoginService;
 use App\Domain\Services\Login\LogoutService;
 

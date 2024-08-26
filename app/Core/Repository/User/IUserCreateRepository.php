@@ -1,5 +1,5 @@
 <?php
-namespace App\Core\Infra\Database\Repository\User;
+namespace App\Core\Repository\User;
 
 use App\Http\Requests\User\UserCreateRequest;
 

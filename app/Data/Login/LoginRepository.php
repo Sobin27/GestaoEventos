@@ -1,7 +1,7 @@
 <?php
-namespace App\Data\Repository\Login;
+namespace App\Data\Login;
 
-use App\Core\Infra\Database\Repository\Login\ILoginRepository;
+use App\Core\Repository\Login\ILoginRepository;
 use App\Http\Requests\Login\LoginRequest;
 use App\Models\User;
 

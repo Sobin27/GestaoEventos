@@ -1,7 +1,7 @@
 <?php
-namespace App\Data\Repository\User;
+namespace App\Data\User;
 
-use App\Core\Infra\Database\Repository\User\IVerifyIfLoginExistsRepository;
+use App\Core\Repository\User\IVerifyIfLoginExistsRepository;
 use App\Models\User;
 
 class VerifyIfLoginExistsRepository implements IVerifyIfLoginExistsRepository

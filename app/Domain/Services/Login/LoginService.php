@@ -1,8 +1,8 @@
 <?php
 namespace App\Domain\Services\Login;
 
-use App\Core\Infra\Database\Repository\Login\ILoginRepository;
-use App\Core\Infra\Database\Repository\User\IVerifyIfCredentialsIsCorrectRepository;
+use App\Core\Repository\Login\ILoginRepository;
+use App\Core\Repository\User\IVerifyIfCredentialsIsCorrectRepository;
 use App\Core\Service\Login\ILoginService;
 use App\Http\Requests\Login\LoginRequest;
 use Exception;

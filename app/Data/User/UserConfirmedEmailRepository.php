@@ -1,7 +1,7 @@
 <?php
-namespace App\Data\Repository\User;
+namespace App\Data\User;
 
-use App\Core\Infra\Database\Repository\User\IUserConfirmedEmailRepository;
+use App\Core\Repository\User\IUserConfirmedEmailRepository;
 use App\Models\User;
 
 class UserConfirmedEmailRepository implements IUserConfirmedEmailRepository

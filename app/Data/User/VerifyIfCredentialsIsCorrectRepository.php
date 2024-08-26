@@ -1,7 +1,7 @@
 <?php
-namespace App\Data\Repository\User;
+namespace App\Data\User;
 
-use App\Core\Infra\Database\Repository\User\IVerifyIfCredentialsIsCorrectRepository;
+use App\Core\Repository\User\IVerifyIfCredentialsIsCorrectRepository;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 

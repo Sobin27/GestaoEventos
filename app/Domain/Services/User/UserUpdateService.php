@@ -1,10 +1,10 @@
 <?php
 namespace App\Domain\Services\User;
 
-use App\Core\Infra\Database\Repository\User\IFindUserByUuidRepository;
-use App\Core\Infra\Database\Repository\User\IUserUpdateRepository;
-use App\Core\Infra\Database\Repository\User\IVerifyIfEmailExistsRepository;
-use App\Core\Infra\Database\Repository\User\IVerifyIfLoginExistsRepository;
+use App\Core\Repository\User\IFindUserByUuidRepository;
+use App\Core\Repository\User\IUserUpdateRepository;
+use App\Core\Repository\User\IVerifyIfEmailExistsRepository;
+use App\Core\Repository\User\IVerifyIfLoginExistsRepository;
 use App\Core\Service\User\IUserUpdateService;
 use App\Http\Requests\User\UserUpdateRequest;
 use App\Models\User;

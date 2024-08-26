@@ -1,7 +1,7 @@
 <?php
-namespace App\Data\Repository\User;
+namespace App\Data\User;
 
-use App\Core\Infra\Database\Repository\User\IVerifyIfEmailExistsRepository;
+use App\Core\Repository\User\IVerifyIfEmailExistsRepository;
 use App\Models\User;
 
 class VerifyIfEmailExistsRepository implements IVerifyIfEmailExistsRepository

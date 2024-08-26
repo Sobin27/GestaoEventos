@@ -1,7 +1,7 @@
 <?php
 namespace App\Domain\Services\User;
 
-use App\Core\Infra\Database\Repository\User\IUserConfirmedEmailRepository;
+use App\Core\Repository\User\IUserConfirmedEmailRepository;
 use App\Core\Service\User\IUserConfirmEmailService;
 
 class UserConfirmEmailService implements IUserConfirmEmailService

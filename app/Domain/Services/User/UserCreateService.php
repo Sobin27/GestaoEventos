@@ -1,9 +1,9 @@
 <?php
 namespace App\Domain\Services\User;
 
-use App\Core\Infra\Database\Repository\User\IUserCreateRepository;
-use App\Core\Infra\Database\Repository\User\IVerifyIfEmailExistsRepository;
-use App\Core\Infra\Database\Repository\User\IVerifyIfLoginExistsRepository;
+use App\Core\Repository\User\IUserCreateRepository;
+use App\Core\Repository\User\IVerifyIfEmailExistsRepository;
+use App\Core\Repository\User\IVerifyIfLoginExistsRepository;
 use App\Core\Service\User\IUserCreateService;
 use App\Http\Requests\User\UserCreateRequest;
 use Exception;
