@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('organizing_company', 255);
             $table->boolean('active')->default(true);
             $table->integer('max_participants')->default(0);
-            $table->timestamp('duration_time');
+            $table->string('duration_time');
             $table->timestamp('event_date');
             $table->timestamps();
         });

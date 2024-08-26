@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string $organizing_company
  * @property bool $active
  * @property int $max_participants
- * @property string $duration_event
+ * @property string $duration_time
  * @property string $event_date
  * @property string $created_at
  * @property string $updated_at
@@ -31,7 +31,7 @@ class Events extends Model
         'organizing_company',
         'active',
         'max_participants',
-        'duration_event',
+        'duration_time',
         'event_date',
         'created_at',
         'updated_at',

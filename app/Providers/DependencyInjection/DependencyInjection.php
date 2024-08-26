@@ -19,7 +19,8 @@ abstract class DependencyInjection
     {
         return collect([
             new UserDi($app),
-            new LoginDi($app)
+            new LoginDi($app),
+            new EventDi($app)
         ]);
     }
     public function configure(): void

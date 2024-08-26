@@ -18,7 +18,7 @@ class EventAddress extends Model
 {
     use HasFactory;
 
-    protected $table = 'event_address';
+    protected $table = 'events_address';
     protected $fillable = [
         'event_id',
         'address',
