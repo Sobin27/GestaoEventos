@@ -36,4 +36,9 @@ class Events extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function address(): HasOne
+    {
+        return $this->hasOne(EventAddress::class, 'event_id');
+    }
 }

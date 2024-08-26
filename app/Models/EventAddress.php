@@ -28,4 +28,9 @@ class EventAddress extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function event(): BelongsTo
+    {
+        return $this->belongsTo(Events::class);
+    }
 }
