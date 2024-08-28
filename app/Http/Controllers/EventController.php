@@ -3,9 +3,11 @@ namespace App\Http\Controllers;
 
 
 use App\Core\Service\Event\IEventCreateService;
+use App\Core\Service\Event\IEventListService;
 use App\Core\Service\Event\IEventToParticipateService;
 use App\Core\Service\Event\IEventUpdateService;
 use App\Http\Requests\Event\CreateEventRequest;
+use App\Http\Requests\Event\ListEventRequest;
 use App\Http\Requests\Event\UpdateEventRequest;
 use Exception;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +18,7 @@ class EventController extends Controller
         private readonly IEventCreateService $eventCreateService,
         private readonly IEventToParticipateService $eventToParticipateService,
         private readonly IEventUpdateService $eventUpdateService,
+        private readonly IEventListService $eventListService,
     )
     { }
 
@@ -49,6 +52,18 @@ class EventController extends Controller
             return $this->response(
                 message: 'Event updated successfully',
                 data: $this->eventUpdateService->updateEvent($request),
+                code: 200
+            );
+        }catch (Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
+    }
+    public function listEvent(ListEventRequest $request): Response
+    {
+        try {
+            return $this->response(
+                message: 'Event list successfully',
+                data: $this->eventListService->eventListPaginated($request),
                 code: 200
             );
         }catch (Exception $e) {

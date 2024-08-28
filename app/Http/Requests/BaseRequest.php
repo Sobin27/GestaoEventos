@@ -1,8 +1,7 @@
 <?php
 namespace App\Http\Requests;
 
-use App\Helpers\Pagination\Pagination;
-use App\Support\Models\BaseResponse;
+use App\Core\Support\Pagination;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
