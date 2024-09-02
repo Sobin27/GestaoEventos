@@ -2,6 +2,7 @@
 namespace App\Providers\DependencyInjection;
 
 use App\Core\Repository\Event\IEventCreateRepository;
+use App\Core\Repository\Event\IEventDetailsRepository;
 use App\Core\Repository\Event\IEventFindByIdRepository;
 use App\Core\Repository\Event\IEventListRepository;
 use App\Core\Repository\Event\IEventToParticipateRepository;
@@ -10,10 +11,12 @@ use App\Core\Repository\Event\IVerifyHowManyParticipantsEventRepository;
 use App\Core\Repository\Event\IVerifyIfEventIsPublicRepository;
 use App\Core\Repository\Event\IVerifyIfEventIsStillActiveRepository;
 use App\Core\Service\Event\IEventCreateService;
+use App\Core\Service\Event\IEventDetailsService;
 use App\Core\Service\Event\IEventListService;
 use App\Core\Service\Event\IEventToParticipateService;
 use App\Core\Service\Event\IEventUpdateService;
 use App\Data\Event\EventCreateRepository;
+use App\Data\Event\EventDetailsRepository;
 use App\Data\Event\EventFindByIdRepository;
 use App\Data\Event\EventListRepository;
 use App\Data\Event\EventToParticipateRepository;
@@ -22,6 +25,7 @@ use App\Data\Event\VerifyHowManyParticipantsEventRepository;
 use App\Data\Event\VerifyIfEventIsPublicRepository;
 use App\Data\Event\VerifyIfEventIsStillActiveRepository;
 use App\Domain\Services\Event\EventCreateService;
+use App\Domain\Services\Event\EventDetailsService;
 use App\Domain\Services\Event\EventListService;
 use App\Domain\Services\Event\EventToParticipateService;
 use App\Domain\Services\Event\EventUpdateService;
@@ -35,6 +39,7 @@ class EventDi extends DependencyInjection
             [IEventToParticipateService::class, EventToParticipateService::class],
             [IEventUpdateService::class, EventUpdateService::class],
             [IEventListService::class, EventListService::class],
+            [IEventDetailsService::class, EventDetailsService::class],
         ];
     }
     protected function repositories(): array
@@ -48,6 +53,7 @@ class EventDi extends DependencyInjection
             [IEventFindByIdRepository::class, EventFindByIdRepository::class],
             [IEventUpdateRepository::class, EventUpdateRepository::class],
             [IEventListRepository::class, EventListRepository::class],
+            [IEventDetailsRepository::class, EventDetailsRepository::class],
         ];
     }
 }

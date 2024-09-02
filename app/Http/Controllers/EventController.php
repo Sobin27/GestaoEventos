@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 
 use App\Core\Service\Event\IEventCreateService;
+use App\Core\Service\Event\IEventDetailsService;
 use App\Core\Service\Event\IEventListService;
 use App\Core\Service\Event\IEventToParticipateService;
 use App\Core\Service\Event\IEventUpdateService;
@@ -19,6 +20,7 @@ class EventController extends Controller
         private readonly IEventToParticipateService $eventToParticipateService,
         private readonly IEventUpdateService $eventUpdateService,
         private readonly IEventListService $eventListService,
+        private readonly IEventDetailsService $eventDetailsService
     )
     { }
 
@@ -64,6 +66,18 @@ class EventController extends Controller
             return $this->response(
                 message: 'Event list successfully',
                 data: $this->eventListService->eventListPaginated($request),
+                code: 200
+            );
+        }catch (Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
+    }
+    public function detailsEvent(int $eventId): Response
+    {
+        try {
+            return $this->response(
+                message: 'Event details list successfully',
+                data: $this->eventDetailsService->getDetailsEvents($eventId),
                 code: 200
             );
         }catch (Exception $e) {
