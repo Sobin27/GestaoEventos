@@ -8,8 +8,10 @@ use App\Core\Service\Event\IEventListService;
 use App\Core\Service\Event\IEventStopParticipatingService;
 use App\Core\Service\Event\IEventToParticipateService;
 use App\Core\Service\Event\IEventUpdateService;
+use App\Core\Service\Event\IMyEventsListService;
 use App\Http\Requests\Event\CreateEventRequest;
 use App\Http\Requests\Event\ListEventRequest;
+use App\Http\Requests\Event\MyEventsRequest;
 use App\Http\Requests\Event\UpdateEventRequest;
 use Exception;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,6 +25,7 @@ class EventController extends Controller
         private readonly IEventListService $eventListService,
         private readonly IEventDetailsService $eventDetailsService,
         private readonly IEventStopParticipatingService $eventStopParticipatingService,
+        private readonly IMyEventsListService $myEventsListService,
     )
     { }
 
@@ -92,6 +95,18 @@ class EventController extends Controller
             return $this->response(
                 message: 'Stop participating event successfully',
                 data: $this->eventStopParticipatingService->stopParticipating($eventId),
+                code: 200
+            );
+        }catch (Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
+    }
+    public function myEventsList(MyEventsRequest $request): Response
+    {
+        try {
+            return $this->response(
+                message: 'My events listing successfully',
+                data: $this->myEventsListService->getMyEventsList($request),
                 code: 200
             );
         }catch (Exception $e) {

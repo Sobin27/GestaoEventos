@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Core\Traits\Mapper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class EventUser extends Model
 {
-    use HasFactory;
+    use HasFactory, Mapper;
 
     protected $table = 'events_participants';
     protected $fillable = [
