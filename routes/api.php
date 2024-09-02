@@ -21,5 +21,6 @@ Route::middleware('jwt')->group(function (){
         Route::put('update', [EventController::class, 'updateEvent'])->name('update.event');
         Route::get('list', [EventController::class, 'listEvent'])->name('list.event');
         Route::get('details/{eventId}', [EventController::class, 'detailsEvent'])->name('details.event');
+        Route::delete('stop-participating/{eventId}', [EventController::class, 'eventStopParticipating'])->name('stop-participating.eventId');
     });
 });
