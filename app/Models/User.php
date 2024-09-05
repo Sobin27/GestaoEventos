@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Core\Traits\ArraySerializer;
+use App\Core\Traits\Mapper;
 use App\Events\CreateNewUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -27,7 +28,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  */
 class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable,ArraySerializer;
+    use HasApiTokens, HasFactory, Notifiable,ArraySerializer,Mapper;
 
     /**
      * The attributes that are mass assignable.

@@ -3,7 +3,9 @@ namespace App\Http\Controllers;
 
 use App\Core\Service\User\IUserConfirmEmailService;
 use App\Core\Service\User\IUserCreateService;
+use App\Core\Service\User\IUserListingService;
 use App\Core\Service\User\IUserUpdateService;
+use App\Http\Requests\User\ListingUserRequest;
 use App\Http\Requests\User\UserCreateRequest;
 use App\Http\Requests\User\UserUpdateRequest;
 use Exception;
@@ -15,6 +17,7 @@ class UserController extends Controller
         private readonly IUserCreateService $userCreateService,
         private readonly IUserConfirmEmailService $confirmEmailService,
         private readonly IUserUpdateService $userUpdateService,
+        private readonly IUserListingService $userListingService,
     )
     { }
 
@@ -49,6 +52,18 @@ class UserController extends Controller
                 message: 'User updated successfully',
                 data: $this->userUpdateService->updatedUser($request),
                 code: 201
+            );
+        } catch (Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
+        }
+    }
+    public function listingUser(ListingUserRequest $request): Response
+    {
+        try {
+            return $this->response(
+                message: 'Users listed successfully',
+                data: $this->userListingService->listingUsers($request),
+                code: 200
             );
         } catch (Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);

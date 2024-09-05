@@ -10,6 +10,7 @@ Route::middleware('jwt')->group(function (){
         Route::post('create', [UserController::class, 'createUser'])->withoutMiddleware('jwt');
         Route::put('confirm/email/{userUuid}', [UserController::class, 'confirmEmail'])->name('confirm.email')->withoutMiddleware('jwt');
         Route::put('update', [UserController::class, 'updateUser'])->name('update.user');
+        Route::get('list', [UserController::class, 'listingUser'])->name('list.user');
     });
     Route::prefix('authentication')->group(function (){
         Route::post('login', [LoginController::class, 'login'])->name('login')->withoutMiddleware('jwt');
