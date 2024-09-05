@@ -1,6 +1,7 @@
 <?php
 namespace App\Providers\DependencyInjection;
 
+use App\Core\Repository\Event\IEventCancelRepository;
 use App\Core\Repository\Event\IEventCreateRepository;
 use App\Core\Repository\Event\IEventDetailsRepository;
 use App\Core\Repository\Event\IEventFindByIdRepository;
@@ -12,6 +13,7 @@ use App\Core\Repository\Event\IMyEventsListRepository;
 use App\Core\Repository\Event\IVerifyHowManyParticipantsEventRepository;
 use App\Core\Repository\Event\IVerifyIfEventIsPublicRepository;
 use App\Core\Repository\Event\IVerifyIfEventIsStillActiveRepository;
+use App\Core\Service\Event\IEventCancelService;
 use App\Core\Service\Event\IEventCreateService;
 use App\Core\Service\Event\IEventDetailsService;
 use App\Core\Service\Event\IEventListService;
@@ -19,6 +21,7 @@ use App\Core\Service\Event\IEventStopParticipatingService;
 use App\Core\Service\Event\IEventToParticipateService;
 use App\Core\Service\Event\IEventUpdateService;
 use App\Core\Service\Event\IMyEventsListService;
+use App\Data\Event\EventCancelRepository;
 use App\Data\Event\EventCreateRepository;
 use App\Data\Event\EventDetailsRepository;
 use App\Data\Event\EventFindByIdRepository;
@@ -30,6 +33,7 @@ use App\Data\Event\MyEventsListRepository;
 use App\Data\Event\VerifyHowManyParticipantsEventRepository;
 use App\Data\Event\VerifyIfEventIsPublicRepository;
 use App\Data\Event\VerifyIfEventIsStillActiveRepository;
+use App\Domain\Services\Event\EventCancelService;
 use App\Domain\Services\Event\EventCreateService;
 use App\Domain\Services\Event\EventDetailsService;
 use App\Domain\Services\Event\EventListService;
@@ -50,6 +54,7 @@ class EventDi extends DependencyInjection
             [IEventDetailsService::class, EventDetailsService::class],
             [IEventStopParticipatingService::class, EventStopParticipatingService::class],
             [IMyEventsListService::class, MyEventsListService::class],
+            [IEventCancelService::class, EventCancelService::class],
         ];
     }
     protected function repositories(): array
@@ -66,6 +71,7 @@ class EventDi extends DependencyInjection
             [IEventDetailsRepository::class, EventDetailsRepository::class],
             [IEventStopParticipatingRepository::class, EventStopParticipatingRepository::class],
             [IMyEventsListRepository::class, MyEventsListRepository::class],
+            [IEventCancelRepository::class, EventCancelRepository::class],
         ];
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Http\Requests\User\UserUpdateRequest;
+use App\Models\Events;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -11,7 +11,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class EmailUpdateNotificationMail extends Mailable
+class EmailEventCanceled extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,8 +19,8 @@ class EmailUpdateNotificationMail extends Mailable
      * Create a new message instance.
      */
     public function __construct(
-        private User $user,
-        private UserUpdateRequest $request
+        public Events $events,
+        public User $user
     )
     { }
 
@@ -30,7 +30,7 @@ class EmailUpdateNotificationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Email Update Notification Mail',
+            subject: 'Email Event Canceled',
         );
     }
 
@@ -40,11 +40,10 @@ class EmailUpdateNotificationMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'email.user_update_notification',
+            view: 'email.notice_event_canceled',
             with: [
+                'events' => $this->events,
                 'user' => $this->user,
-                'ip' => $this->request->getClientIp(),
-                'browser' => $this->request->userAgent(),
             ],
         );
     }

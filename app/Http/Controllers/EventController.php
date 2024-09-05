@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Core\Service\Event\IEventCancelService;
 use App\Core\Service\Event\IEventCreateService;
 use App\Core\Service\Event\IEventDetailsService;
 use App\Core\Service\Event\IEventListService;
@@ -26,6 +27,7 @@ class EventController extends Controller
         private readonly IEventDetailsService $eventDetailsService,
         private readonly IEventStopParticipatingService $eventStopParticipatingService,
         private readonly IMyEventsListService $myEventsListService,
+        private readonly IEventCancelService $eventCancelService,
     )
     { }
 
@@ -107,6 +109,18 @@ class EventController extends Controller
             return $this->response(
                 message: 'My events listing successfully',
                 data: $this->myEventsListService->getMyEventsList($request),
+                code: 200
+            );
+        }catch (Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
+    }
+    public function cancelEvent(int $eventId): Response
+    {
+        try {
+            return $this->response(
+                message: 'Event canceled successfully',
+                data: $this->eventCancelService->cancelEvent($eventId),
                 code: 200
             );
         }catch (Exception $e) {

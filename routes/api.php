@@ -23,5 +23,6 @@ Route::middleware('jwt')->group(function (){
         Route::get('details/{eventId}', [EventController::class, 'detailsEvent'])->name('details.event');
         Route::delete('stop-participating/{eventId}', [EventController::class, 'eventStopParticipating'])->name('stop-participating.eventId');
         Route::get('my-events', [EventController::class, 'myEventsList'])->name('my-events');
+        Route::post('cancel/{eventId}', [EventController::class, 'cancelEvent'])->name('cancel.event');
     });
 });
