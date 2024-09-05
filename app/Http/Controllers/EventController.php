@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Core\Repository\Event\IEventPrivateToParticipateRepository;
 use App\Core\Service\Event\IEventCancelService;
 use App\Core\Service\Event\IEventCreateService;
 use App\Core\Service\Event\IEventDetailsService;
@@ -28,6 +29,7 @@ class EventController extends Controller
         private readonly IEventStopParticipatingService $eventStopParticipatingService,
         private readonly IMyEventsListService $myEventsListService,
         private readonly IEventCancelService $eventCancelService,
+        private readonly IEventPrivateToParticipateRepository $eventPrivateToParticipateRepository
     )
     { }
 
@@ -122,6 +124,18 @@ class EventController extends Controller
                 message: 'Event canceled successfully',
                 data: $this->eventCancelService->cancelEvent($eventId),
                 code: 200
+            );
+        }catch (Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
+    }
+    public function participateToPrivateEvent(int $eventId, int $userId): Response
+    {
+        try {
+            return $this->response(
+                message: 'Participate to private event successfully',
+                data: $this->eventPrivateToParticipateRepository->participateToPrivateEvent($eventId, $userId),
+                code: 201
             );
         }catch (Exception $e) {
             return response()->json(['message' => $e->getMessage()], 500);

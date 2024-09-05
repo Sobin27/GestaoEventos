@@ -5,7 +5,9 @@ use App\Core\Repository\Event\IEventCancelRepository;
 use App\Core\Repository\Event\IEventCreateRepository;
 use App\Core\Repository\Event\IEventDetailsRepository;
 use App\Core\Repository\Event\IEventFindByIdRepository;
+use App\Core\Repository\Event\IEventGetParticipantsRepository;
 use App\Core\Repository\Event\IEventListRepository;
+use App\Core\Repository\Event\IEventPrivateToParticipateRepository;
 use App\Core\Repository\Event\IEventStopParticipatingRepository;
 use App\Core\Repository\Event\IEventToParticipateRepository;
 use App\Core\Repository\Event\IEventUpdateRepository;
@@ -16,7 +18,9 @@ use App\Core\Repository\Event\IVerifyIfEventIsStillActiveRepository;
 use App\Core\Service\Event\IEventCancelService;
 use App\Core\Service\Event\IEventCreateService;
 use App\Core\Service\Event\IEventDetailsService;
+use App\Core\Service\Event\IEventInviteParticipantsPrivateService;
 use App\Core\Service\Event\IEventListService;
+use App\Core\Service\Event\IEventPrivateToParticipateService;
 use App\Core\Service\Event\IEventStopParticipatingService;
 use App\Core\Service\Event\IEventToParticipateService;
 use App\Core\Service\Event\IEventUpdateService;
@@ -25,7 +29,9 @@ use App\Data\Event\EventCancelRepository;
 use App\Data\Event\EventCreateRepository;
 use App\Data\Event\EventDetailsRepository;
 use App\Data\Event\EventFindByIdRepository;
+use App\Data\Event\EventGetParticipantsRepository;
 use App\Data\Event\EventListRepository;
+use App\Data\Event\EventPrivateToParticipateRepository;
 use App\Data\Event\EventStopParticipatingRepository;
 use App\Data\Event\EventToParticipateRepository;
 use App\Data\Event\EventUpdateRepository;
@@ -37,6 +43,7 @@ use App\Domain\Services\Event\EventCancelService;
 use App\Domain\Services\Event\EventCreateService;
 use App\Domain\Services\Event\EventDetailsService;
 use App\Domain\Services\Event\EventListService;
+use App\Domain\Services\Event\EventPrivateToParticipateService;
 use App\Domain\Services\Event\EventStopParticipatingService;
 use App\Domain\Services\Event\EventToParticipateService;
 use App\Domain\Services\Event\EventUpdateService;
@@ -55,6 +62,7 @@ class EventDi extends DependencyInjection
             [IEventStopParticipatingService::class, EventStopParticipatingService::class],
             [IMyEventsListService::class, MyEventsListService::class],
             [IEventCancelService::class, EventCancelService::class],
+            [IEventPrivateToParticipateService::class, EventPrivateToParticipateService::class],
         ];
     }
     protected function repositories(): array
@@ -72,6 +80,7 @@ class EventDi extends DependencyInjection
             [IEventStopParticipatingRepository::class, EventStopParticipatingRepository::class],
             [IMyEventsListRepository::class, MyEventsListRepository::class],
             [IEventCancelRepository::class, EventCancelRepository::class],
+            [IEventPrivateToParticipateRepository::class, EventPrivateToParticipateRepository::class],
         ];
     }
 }

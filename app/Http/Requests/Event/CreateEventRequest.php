@@ -15,6 +15,7 @@ use App\Http\Requests\BaseRequest;
  * @property string $city
  * @property string $country
  * @property string $state
+ * @property array $invitesUsers
  */
 class CreateEventRequest extends BaseRequest
 {
@@ -38,6 +39,7 @@ class CreateEventRequest extends BaseRequest
             'city' => 'required|string',
             'country' => 'required|string',
             'state' => 'required|string',
+            'invitesUsers' => 'array|exists:users,id',
         ];
     }
 }

@@ -15,7 +15,7 @@
 <form method="POST" action="{{ route('confirm.email', ['userUuid' => $user->uuid]) }}">
     @csrf
     @method('PUT')
-    Para validar seu email clique no butão abaixo:
+    Para validar seu email clique no botão abaixo:
     <button type="submit" class="btn btn-primary">confirmar cadastro</button>
 </form>
 </body>

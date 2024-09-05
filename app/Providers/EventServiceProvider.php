@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Events\CancelEvent;
 use App\Events\CreateNewUser;
+use App\Events\InviteUsersToPrivateEvent;
+use App\Listeners\SendEmailForEventUsers;
 use App\Listeners\SendEmailVerificationUser;
 use App\Listeners\SendingEmailToCanceledEventUsers;
 use Illuminate\Auth\Events\Registered;
@@ -26,6 +28,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         CancelEvent::class => [
             SendingEmailToCanceledEventUsers::class,
+        ],
+        InviteUsersToPrivateEvent::class => [
+            SendEmailForEventUsers::class,
         ],
     ];
 
