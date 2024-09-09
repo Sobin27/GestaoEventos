@@ -51,7 +51,7 @@ class UserController extends Controller
             return $this->response(
                 message: 'User updated successfully',
                 data: $this->userUpdateService->updatedUser($request),
-                code: 201
+                code: 200
             );
         } catch (Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);

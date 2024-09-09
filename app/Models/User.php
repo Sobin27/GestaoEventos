@@ -40,9 +40,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         'uuid',
         'name',
         'email',
-        'password',
         'ativo',
-        'qtd_tentativa',
         'created_by',
         'updated_by'
     ];

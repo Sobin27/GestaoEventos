@@ -14,7 +14,8 @@ class UserListingRepository implements IUserListingRepository
                  'id',
                  'name',
                  'email',
-             ])->where($this->getFilter($request))->get()->map(function ($user) {
+             ])->where($this->getFilter($request))
+             ->get()->map(function ($user) {
                  return $user->mapTo();
              });
     }
