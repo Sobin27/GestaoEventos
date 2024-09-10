@@ -5,8 +5,9 @@ use App\Core\Service\Login\ILogoutService;
 
 class LogoutService implements ILogoutService
 {
-    public function logout(): void
+    public function logout(): bool
     {
         auth()->logout();
+        return true;
     }
 }

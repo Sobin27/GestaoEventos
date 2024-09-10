@@ -32,7 +32,7 @@ class LoginController extends Controller
         try {
             return $this->response(
                 message: 'Logout successfully',
-                data: true,
+                data: $this->logoutService->logout(),
                 code: Response::HTTP_OK
             );
         }catch (\Exception $e) {
