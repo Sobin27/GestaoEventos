@@ -7,9 +7,8 @@ use Illuminate\Support\Facades\Log;
 
 trait CancelEvent
 {
-    public function eventCancel(int $eventId): void
+    public function eventCancel(Events $events): void
     {
-        $event = Events::query()->find($eventId);
-        CancelEventEvent::dispatch($event);
+        CancelEventEvent::dispatch($events);
     }
 }

@@ -12,7 +12,7 @@ class EventCreateRepository implements IEventCreateRepository
     public function createEvent(CreateEventRequest $request): Events
     {
         try {
-            return Events::query()->create([
+            $event = Events::query()->create([
                 'name' => $request->name,
                 'description' => $request->description,
                 'type' => $request->type,
@@ -23,6 +23,8 @@ class EventCreateRepository implements IEventCreateRepository
                 'event_date' => $request->eventDate,
                 'created_at' => now(),
             ]);
+            $this->createEventAddress($event, $request);
+            return $event;
         }catch (Exception $exception) {
             throw new Exception($exception->getMessage());
         }

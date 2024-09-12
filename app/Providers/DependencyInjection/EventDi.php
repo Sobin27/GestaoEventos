@@ -15,6 +15,7 @@ use App\Core\Repository\Event\IMyEventsListRepository;
 use App\Core\Repository\Event\IVerifyHowManyParticipantsEventRepository;
 use App\Core\Repository\Event\IVerifyIfEventIsPublicRepository;
 use App\Core\Repository\Event\IVerifyIfEventIsStillActiveRepository;
+use App\Core\Repository\Event\IVerifyIfUserIsOrganizerEventRepository;
 use App\Core\Service\Event\IEventCancelService;
 use App\Core\Service\Event\IEventCreateService;
 use App\Core\Service\Event\IEventDetailsService;
@@ -39,6 +40,7 @@ use App\Data\Event\MyEventsListRepository;
 use App\Data\Event\VerifyHowManyParticipantsEventRepository;
 use App\Data\Event\VerifyIfEventIsPublicRepository;
 use App\Data\Event\VerifyIfEventIsStillActiveRepository;
+use App\Data\Event\VerifyIfUserIsOrganizerEventRepository;
 use App\Domain\Services\Event\EventCancelService;
 use App\Domain\Services\Event\EventCreateService;
 use App\Domain\Services\Event\EventDetailsService;
@@ -81,6 +83,7 @@ class EventDi extends DependencyInjection
             [IMyEventsListRepository::class, MyEventsListRepository::class],
             [IEventCancelRepository::class, EventCancelRepository::class],
             [IEventPrivateToParticipateRepository::class, EventPrivateToParticipateRepository::class],
+            [IVerifyIfUserIsOrganizerEventRepository::class, VerifyIfUserIsOrganizerEventRepository::class],
         ];
     }
 }

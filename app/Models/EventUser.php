@@ -18,5 +18,4 @@ class EventUser extends Model
         'event_id',
         'participant_id',
     ];
-
 }
