@@ -18,11 +18,12 @@ abstract class DependencyInjection
     public static function providers(Application $app): Collection
     {
         return collect([
-            new LoginDi($app)
+            new UserDi($app),
+            new LoginDi($app),
+            new EventDi($app)
         ]);
     }
-
-    public function configure()
+    public function configure(): void
     {
         $configurations = array_merge(
             $this->services(),

@@ -1,66 +1,496 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# API de Gestão de Eventos
+Para fins de estudo, foi desenvolvida uma API para gestão de eventos. 
+A API foi desenvolvida utilizando o framework Laravel, e o banco de dados MySQL, utilizando da arquitetura Hexagonal, 
+API permite a criação, edição, exclusão e listagem de eventos, além de permitir a criação de 
+usuários e autenticação.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Instalação
+Para instalar a API, siga os passos abaixo:
+```bash
+git clone https://github.com/Sobin27/GestaoEventos.git
+```
+Após fazer o clone do projeto, acesse a pasta do projeto e execute o comando abaixo para instalar as dependências:
+```bash
+composer update
+````
+Ou, se preferir, você pode utilizar o docker para rodar o projeto no seu local, utilizando os comandos abaixo:
 
-## About Laravel
+### Montar a imagem docker:
+```bash
+docker build -t gestaoeventos 'caminho_do_projeto'
+````
+### Rodar o container:
+```bash
+docker run -d -p 8000:80 gestaoeventos 
+````
+Após você ter configurado o ambiente você deve rodar as migrations para consegui utilizar o banco de dados, para isso execute o comando abaixo:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+*Obs*: deve ser configurado o seu .env antes de executar esse comando, adicionando as credenciais do seu banco de dados.
+```bash
+php artisan migrate
+````
+Você deve configurar seu .env com informações smtp para poder utilizar de algumas funções que o sistema possue, para isso, 
+adicione as seguintes informações no seu .env:
+```
+> MAIL_MAILER=smtp<br />
+> MAIL_HOST=seu_host<br />
+> MAIL_PORT=2525<br />
+> MAIL_USERNAME=seu_usuario<br />
+> MAIL_PASSWORD=sua_senha<br />
+> MAIL_ENCRYPTION=tls<br />
+> MAIL_FROM_ADDRESS="hello@example.com"<br />
+> MAIL_FROM_NAME="${APP_NAME}"<br />
+```
+Após finalizar a migração, você pode utilizar o projeto tranquilamente.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+*Obs*:
+Caso você tenha optado por não utilizar o container docker, depois de ter configurado suas migrações e .env rode
+o comando abaixo para rodar o servidor:
+```bash
+php artisan serve
+````
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Utilização
+Para utilizar a API, você pode utilizar o Postman ou Insomnia.
 
-## Learning Laravel
+## API
+<details>
+<summary>CRUD Usuario</summary>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| MÉTODO | ROTA                                 |
+|--------|--------------------------------------|
+| POST   | /api/user/create                     |
+| ------ | ------------------------------------ |
+| PUT    | /api/user/update                     |
+| ------ | ------------------------------------ |
+| GET    | /api/user/list                       |
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+<details>   
+<summary>Criar usuário</summary>
+Rota: /api/user/create
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Para criar um usuário, você deve enviar um json no seguinte formato:
+```json
+{
+    "name": "Seu nome",
+    "email": "Seu email",
+    "password": "Sua senha",
+    "login": "Seu login"
+}
+```
+Retorno:
+```json
+{
+    "message": "User created successfully",
+    "data": true
+}
+```
+</details>
 
-## Laravel Sponsors
+<details>   
+<summary> Editar usuário</summary>
+Rota: /api/user/update
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Para editar um usuário, você deve enviar um json no seguinte formato:
+```json
+{
+    "uuid": "uuid_do_usuario",
+    "name": "Seu nome",
+    "email": "Seu email",
+    "login": "Seu login"
+}
+```
+Retorno:
+```json
+{
+    "message": "User updated successfully",
+    "data": true
+}
+```
+</details>
 
-### Premium Partners
+<details>   
+<summary> Listar usuário</summary>
+Rota: /api/user/list
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Retorno:
+```json
+{
+    "message": "Users listed successfully",
+    "data": [
+        {
+            "id": 1,
+            "name": "teste",
+            "email": "teste2@example.com"
+        }
+    ]
+}
+```
+Caso queira listar um usuário específico, você pode passar os seguintes filtros:
 
-## Contributing
+```
+"name": "Seu nome",
+"email": "Seu email",
+```
+</details>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+</details>
 
-## Code of Conduct
+<details>   
+<summary> Authentication</summary>
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+|MÉTODO| ROTA                                 |
+|------|--------------------------------------|
+| POST | /api/authentication/login                     |
+|------| ------------------------------------ |
+| POST | /api/authentication/logout                     |
 
-## Security Vulnerabilities
+<details> 
+<summary>Login</summary>
+Rota: /api/authentication/login
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Para fazer login, você deve enviar um json no seguinte formato:
+```json
+{
+    "login": "Seu login",
+    "password": "Sua senha"
+}
+```
 
-## License
+Retorno:
+```json
+{
+    "message": "Login successfully",
+    "data": {
+        "Name": "teste",
+        "Email": "teste2@example.com",
+        "Token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGhlbnRpY2F0aW9uL2xvZ2luIiwiaWF0IjoxNzI2NTA2MTY1LCJleHAiOjE3MjY1OTI1NjUsIm5iZiI6MTcyNjUwNjE2NSwianRpIjoiZmFLRjRhVDJIZjJ2TENMbiIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.s5NjNJ3g2mgHr8F6FF2HM8wS_Py8U5hxD_kKsezXRjY"
+    }
+}
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+</details>
+
+<details> 
+<summary>Logout</summary>
+Rota: /api/authentication/logout
+
+Retorno:
+```json
+{
+    "message": "Logout successfully",
+    "data": true
+}
+```
+</details>
+
+</details>
+
+<details> 
+<summary>CRUD Eventos</summary>
+
+| MÉTODO | ROTA                                 |
+|--------|--------------------------------------|
+| POST   | /api/event/create                     |
+| ------ | ------------------------------------ |
+| POST   | /api/event/to-participate/{eventId}                     |
+| ------ | ------------------------------------ |
+| PUT    | /api/event/update                     |
+| ------ | ------------------------------------ |
+| GET    | /api/event/list                     |
+| ------ | ------------------------------------ |
+| GET    | /api/event/details/{eventId}                     |
+| ------ | ------------------------------------ |
+| DELETE | /api/event/stop-participating/{eventId}                     |
+| ------ | ------------------------------------ |
+| GET    | /api/event/my-events                     |
+| ------ | ------------------------------------ |
+| POST   | /api/event/cancel/{eventId}                     |
+
+
+<details> 
+<summary>Criar evento</summary>
+Rota: /api/event/create
+
+Para criar um evento, você deve enviar um json no seguinte formato:
+1ª Caso o evento for publico:
+```json
+{
+    "name": "Tech Conference 2024",
+    "description": "A conference focused on the latest in technology.",
+    "type": "Publico",
+    "organizingCompany": "TechCorp",
+    "maxParticipants": 10,
+    "durationTime": "3 days",
+    "eventDate": "2024-10-15",
+    "address": "123 Tech Street",
+    "city": "San Francisco",
+    "country": "USA",
+    "state": "California"
+}
+```
+2º Caso o evento for privado:
+```json
+{
+    "name": "Tech Conference 2024",
+    "description": "A conference focused on the latest in technology.",
+    "type": "Privada",
+    "organizingCompany": "TechCorp",
+    "maxParticipants": 10,
+    "durationTime": "3 days",
+    "eventDate": "2024-10-15",
+    "address": "123 Tech Street",
+    "city": "San Francisco",
+    "country": "USA",
+    "state": "California",
+    "invitesUsers": [1,2]
+}
+```
+
+Retorno:
+```json
+{
+    "message": "Event created successfully",
+    "data": true
+}
+```
+
+</details>
+
+<details> 
+<summary>Participar do evento</summary>
+Rota: /api/event/to-participate/{eventId}
+
+Para participar de um evento, primeiro, ele deve ser público e você precisa está logado, caso atenda esses requistos, você vai receber 
+o seguinte retorno
+Retorno:
+```json
+{
+    "message": "Event to participate successfully",
+    "data": true
+}
+```
+
+Caso o evento não seja publico, você vai receber o seguinte retorno:
+```json
+{
+    "message": "Event is not public"
+}
+```
+Caso o numero de participantes do evento ja tenha sido atingido, você
+recebera o seguinte retorno:
+```json
+{
+    "message": "Event has no vacancies"
+}
+```
+Caso o evento não esteja mais ativo, você recebera o seguinte
+retorno:
+```json
+{
+    "message": "Event is not active"
+}
+```
+
+
+</details>
+
+<details> 
+<summary>Editar o evento</summary>
+Rota: /api/event/update
+
+```json
+{
+  "eventId": "required|integer",
+  "name": "string",
+  "description": "string",
+  "type": "string",
+  "organizingCompany": "string",
+  "maxParticipants": "integer",
+  "durationTime": "string",
+  "eventDate": "date",
+  "address": "string",
+  "city": "string",
+  "country": "string",
+  "state": "string",
+  "active": "boolean"
+}
+```
+
+Retorno:
+```json
+{
+    "message": "Event updated successfully",
+    "data": true
+}
+```
+
+
+</details>
+
+<details> 
+<summary>Listar Eventos</summary>
+Rota: /api/event/list?page=1&perPage=10
+
+Passe a paginação que você queira e receberar o seguinte retorno:
+
+```json
+{
+    "message": "Event list successfully",
+    "data": {
+        "list": [
+            {
+                "id": 1,
+                "name": "Tech Conference 2024",
+                "description": "A conference focused on the latest in technology.",
+                "type": "Publica",
+                "eventOrganizer": 1,
+                "organizingCompany": "TechCorp",
+                "active": 1,
+                "maxParticipants": 10,
+                "durationTime": "3 days",
+                "eventDate": "2024-10-15 00:00:00",
+                "createdAt": "2024-09-16 17:38:25",
+                "updatedAt": "2024-09-16 17:38:25",
+                "eventOrganizerName": "teste",
+                "participantsCount": 1
+            }
+        ],
+        "pagination": {
+            "total": 1,
+            "perPage": 10,
+            "currentPage": 1
+        }
+    }
+}
+```
+
+Caso queira listar um usuário específico, você pode passar os seguintes filtros:
+
+```
+"type": "Publica" ou "Privada",
+"active": "True" ou "False",
+"name": "nome_do_evento",
+```
+
+</details>
+
+
+<details> 
+<summary>Detalhes do Evento</summary>
+Rota: /api/event/details/{eventId}
+
+Retorno
+```json
+{
+    "message": "Event details list successfully",
+    "data": {
+        "eventName": "Tech Conference 2024",
+        "eventDescription": "A conference focused on the latest in technology.",
+        "eventType": "Publica",
+        "eventOrganizer": "teste",
+        "eventActive": 1,
+        "eventDuration": "3 days",
+        "eventDate": "2024-10-15 00:00:00",
+        "eventAddress": "123 Tech Street",
+        "eventCity": "San Francisco",
+        "eventState": "California",
+        "eventCountry": "USA",
+        "participantsCount": 1
+    }
+}
+```
+
+</details>
+
+
+<details> 
+<summary>Parar de participar de um Evento</summary>
+Rota: /api/event/stop-participating/{eventId}
+
+Você precisa está logado e participar de um evento, após inserir o evento 
+que partcipa, receberá o seguinte retorno:
+```json
+{
+    "message": "Event stop participating successfully",
+    "data": true
+}
+```
+
+</details>
+
+<details> 
+<summary>Meus Eventos</summary>
+Rota: /api/event/my-events?page=1&perPage=10
+
+Você precisa está logado e participar de um evento. 
+
+Retorno:
+```json
+{
+    "message": "My events listing successfully",
+    "data": {
+        "list": [
+            {
+                "id": 1,
+                "name": "Tech Conference 2024",
+                "type": "Publica",
+                "organizingCompany": "TechCorp",
+                "active": 1,
+                "durationTime": "3 days",
+                "eventDate": "2024-10-15 00:00:00",
+                "participantsCount": 1
+            }
+        ],
+        "pagination": {
+            "total": 1,
+            "perPage": 10,
+            "currentPage": 1
+        }
+    }
+}
+```
+
+</details>
+
+<details> 
+<summary>Cancelar o Evento</summary>
+Rota: /api/event/cancel/{eventId}
+
+Você precisa inserir o evento em que você é o organizador.
+
+Retorno:
+```json
+{
+    "message": "Event canceled successfully",
+    "data": true
+}
+```
+
+</details>
+
+
+
+</details>
+
+
+## Testes
+Para rodar os testes, você deve rodar o comando abaixo:
+```bash
+php artisan test
+```
+
+Caso queira rodar apenas os testes de serviço:
+```bash
+php artisan test tests/Unit/Services
+```
+
+Caso queira rodar apenas os testes de feature:
+```bash
+php artisan test tests/Feature
+```
+
+Caso queira rodar um teste específico, você pode rodar o comando abaixo:
+```bash
+php artisan test --filter=Class_test
+```
