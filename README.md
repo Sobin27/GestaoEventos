@@ -2,7 +2,7 @@
 Para fins de estudo, foi desenvolvida uma API para gestão de eventos. 
 A API foi desenvolvida utilizando o framework Laravel, e o banco de dados MySQL, utilizando da arquitetura Hexagonal, 
 API permite a criação, edição, exclusão e listagem de eventos, além de permitir a criação de 
-usuários e autenticação.
+usuários e autenticação..
 
 ## Instalação
 Para instalar a API, siga os passos abaixo:
