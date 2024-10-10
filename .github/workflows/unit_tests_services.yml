@@ -24,8 +24,6 @@ jobs:
           MYSQL_DATABASE: test
         ports:
           - "3306:3306"
-        volumes:
-          - ./mysql_data:/var/lib/mysql
 
     steps:
       - name: Checkout repository
