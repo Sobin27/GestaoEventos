@@ -17,6 +17,15 @@ jobs:
         ports:
           - 1025:1025
           - 8025:8025
+      db:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: test
+          MYSQL_DATABASE: test
+        ports:
+          - "3306:3306"
+        volumes:
+          - ./mysql_data:/var/lib/mysql
 
     steps:
       - name: Checkout repository
