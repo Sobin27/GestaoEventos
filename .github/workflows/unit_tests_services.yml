@@ -7,16 +7,12 @@ on:
   pull_request:
     branches:
       - main
+
 jobs:
   laravel-test:
     runs-on: ubuntu-latest
 
     services:
-      mailhog:
-        image: mailhog/mailhog
-        ports:
-          - 1025:1025
-          - 8025:8025
       db:
         image: postgres:latest
         env:
@@ -24,6 +20,10 @@ jobs:
           POSTGRES_PASSWORD: test
           PGDATA: /data/postgres
           POSTGRES_DB: test
+        ports:
+          - "5432:5432"
+        volumes:
+          - postgres-db:/data/postgres
 
     steps:
       - name: Checkout repository
