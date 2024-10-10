@@ -2,6 +2,7 @@
 namespace Tests\Feature\User;
 
 use App\Models\User;
+use App\Models\UserPassword;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
@@ -14,6 +15,7 @@ class UserListingTest extends TestCase
     {
         // Arrange
         Mail::fake();
+        UserPassword::query()->delete();
         User::query()->delete();
         $user = User::factory(5)->create();
         $this->actingAs($user->first(), 'jwt');
@@ -37,6 +39,7 @@ class UserListingTest extends TestCase
     {
         // Arrange
         Mail::fake();
+        UserPassword::query()->delete();
         User::query()->delete();
         $user = User::factory(5)->create();
         $userFilter = $user->first();
@@ -59,6 +62,7 @@ class UserListingTest extends TestCase
     {
         // Arrange
         Mail::fake();
+        UserPassword::query()->delete();
         User::query()->delete();
         $user = User::factory(5)->create();
         $userFilter = $user->first();
