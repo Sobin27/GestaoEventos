@@ -12,24 +12,26 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-#      mailhog:
-#        image: mailhog/mailhog
-#        ports:
-#          - 1025:1025
-#          - 8025:8025
-      db:
-        image: mysql:5.7
-        env:
-          MYSQL_ROOT_PASSWORD: test
-          MYSQL_DATABASE: test
+      mailhog:
+        image: mailhog/mailhog
         ports:
-          - "3306:3306"
+          - 1025:1025
+          - 8025:8025
+      db:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+          PGDATA: /data/postgres
+          POSTGRES_DB: test
+        ports:
+          - "5432:5432"
         volumes:
-          - ./mysql_data:/var/lib/mysql
+          - postgres-db:/data/postgres
 
     steps:
-      - name: Remove directory
-        run: sudo rm -rf ./mysql_data
+#      - name: Remove directory
+#        run: sudo rm -rf ./mysql_data
       - name: Checkout repository
         uses: actions/checkout@v3
       - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
