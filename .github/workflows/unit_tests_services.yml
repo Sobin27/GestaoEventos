@@ -28,8 +28,6 @@ jobs:
           - ./mysql_data:/var/lib/mysql
 
     steps:
-      - name: Set permissions for mysql_data
-      - run: sudo chmod -R 777 ./mysql_data
       - name: Checkout repository
         uses: actions/checkout@v3
       - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
