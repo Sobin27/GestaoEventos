@@ -17,7 +17,7 @@ class EventCancelRepositoryTest extends TestCase
     public function test_cancelEvent_withValidData_returnsOk(): void
     {
         //Arrange
-        $event = Events::factory()->createOne();
+        $event = Events::factory()->createOne(['active' => true]);
         $this->sut = new EventCancelRepository();
         //Act
         $result = $this->sut->cancelEvent($event->id);

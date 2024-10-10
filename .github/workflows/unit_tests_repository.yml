@@ -1,12 +1,12 @@
-name: Unit tests services
+name: Unit Tests Repository
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+    push:
+        branches:
+        - main
+    pull_request:
+        branches:
+        - main
 
 jobs:
   laravel-test:
@@ -43,4 +43,4 @@ jobs:
           php artisan config:clear
           chmod -R 777 storage bootstrap/cache
       - name: Run tests
-        run: php artisan test tests/Unit/Service
+        run: php artisan test tests/Unit/Repository
