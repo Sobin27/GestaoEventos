@@ -47,4 +47,4 @@ jobs:
       - name: Run tests
         run: php artisan test tests/Unit/Service
       - name: Remove directory as sudo
-        run: sudo rm -rf ./mysql_data
+        run: rm -rf ./mysql_data
