@@ -35,4 +35,4 @@ jobs:
           php artisan config:clear
           chmod -R 777 storage bootstrap/cache
       - name: Run tests
-        run: php artisan test tests/Unit/Services
+        run: php artisan test tests/Unit/Service
