@@ -41,6 +41,7 @@ jobs:
         run: |
           php artisan key:generate
           php artisan jwt:secret
+          php artisan migrate
           php artisan config:clear
           chmod -R 777 storage bootstrap/cache
       - name: Run tests
