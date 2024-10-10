@@ -33,7 +33,6 @@ jobs:
           php artisan key:generate
           php artisan jwt:secret
           php artisan config:clear
-          php artisan migrate
           chmod -R 777 storage bootstrap/cache
       - name: Run tests
         run: php artisan test tests/Unit/Services
