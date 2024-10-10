@@ -43,6 +43,8 @@ class EventListTest extends TestCase
     public function test_listEvents_withFilterForType_returns200(): void
     {
         //Arrange
+        EventAddress::truncate();
+        Events::truncate();
         $user = User::factory()->createOne();
         $this->actingAs($user, 'jwt');
         EventAddress::factory(10)->create()->random();
