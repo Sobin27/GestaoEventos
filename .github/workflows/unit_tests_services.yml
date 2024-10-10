@@ -1,0 +1,50 @@
+name: Unit tests services
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  laravel-test:
+    runs-on: ubuntu-latest
+
+    services:
+      mailhog:
+        image: mailhog/mailhog
+        ports:
+          - 1025:1025
+          - 8025:8025
+      db:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+          PGDATA: /data/postgres
+          POSTGRES_DB: test
+        ports:
+          - "5432:5432"
+        volumes:
+          - postgres-db:/data/postgres
+
+    steps:
+#      - name: Remove directory
+#        run: sudo rm -rf ./mysql_data
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+        with:
+          php-version: '8.1'
+      - name: Copy .env file
+        run: php -r "file_exists('.env') || copy('.env.testing.ci', '.env');"
+      - name: Install dependencies
+        run: composer install
+      - name: Run the commands
+        run: |
+          php artisan key:generate
+          php artisan jwt:secret
+          php artisan migrate
+          php artisan config:clear
+          chmod -R 777 storage bootstrap/cache
