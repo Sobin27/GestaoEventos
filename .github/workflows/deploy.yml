@@ -20,7 +20,7 @@ jobs:
 
       - name: pulling changes from repository
         run: |
-          git pull
+          git pull origin main
 
       - name: Stop and remove old containers
         run: |
