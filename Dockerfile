@@ -19,6 +19,8 @@ RUN apk add php82 \
         php82-curl \
         php82-pdo_mysql \
         php82-mysqli \
+        php82-pdo_pgsql \
+        php82-pgsql \
         php82-openssl \
         php82-mbstring \
         php82-tokenizer \
