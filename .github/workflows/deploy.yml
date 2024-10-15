@@ -18,20 +18,21 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 
-      - name: Stop and remove old containers
-        run: |
-          sudo docker stop $(sudo docker ps -a -q) || true
-          sudo docker rm $(sudo docker ps -a -q) || true
-
-      - name: Prune Docker system
-        run: |
-          sudo docker system prune -f
-
       - name: Create env file
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
 
-      - name: Build and run Docker container
+      - name: Build and push docker image
         run: |
-          sudo docker build --no-cache -t gestao-eventos .
-          sudo docker run -d -p 80:80 gestao-eventos
+          IMAGE="us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/docker-repository/gestao-eventos:latest"
+          docker build -t $IMAGE .
+          docker push $IMAGE
+
+      - name: Deploy to Cloud Run
+        run: |
+          IMAGE="us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/docker-repository/gestao-eventos:latest"
+          gcloud run deploy gestao-eventos \
+          --image $IMAGE \
+          --platform managed \
+          --region us-central1 \
+          --allow-unauthenticated
