@@ -29,7 +29,5 @@ jobs:
 
       - name: Build and run Docker container
         run: |
-          cd /home/jcsobreiraneto/GestaoEventos
-          git pull origin main
           sudo docker build -t gestao-eventos .
           sudo docker run -d -p 80:80 gestao-eventos
