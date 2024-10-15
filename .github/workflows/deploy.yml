@@ -20,6 +20,6 @@ jobs:
 
       - name: Deploy
         run: |
-          cd /GestaoEventos && git pull origin main && sudo docker stop $(sudo docker ps -a -q)
+          cd GestaoEventos && git pull origin main && sudo docker stop $(sudo docker ps -a -q)
           && sudo docker system prune -f && sudo docker build -t gestao-eventos .
           && sudo docker run -d -p 80:80 gestao-eventos
