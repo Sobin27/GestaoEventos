@@ -27,6 +27,10 @@ jobs:
         run: |
           sudo docker system prune -f
 
+      - name: create env file
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > .env
+
       - name: Build and run Docker container
         run: |
           sudo docker build -t gestao-eventos .
