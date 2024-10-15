@@ -34,5 +34,5 @@ jobs:
           gcloud run deploy gestao-eventos \
           --image $IMAGE \
           --platform managed \
-          --region us-central1 \
+          --region southamerica-east1 \
           --allow-unauthenticated
