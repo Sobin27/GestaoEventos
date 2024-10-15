@@ -16,7 +16,7 @@ jobs:
       - name: Set up google cloud credentials
         uses: google-github-actions/auth@v2
         with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 
       - name: Stop and remove old containers
         run: |
