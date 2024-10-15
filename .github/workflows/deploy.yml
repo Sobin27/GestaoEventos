@@ -18,23 +18,24 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 
-      - name: teste
-        run: ls -la
+      - name: pulling changes from repository
+        run: |
+          git pull
 
-#      - name: Stop and remove old containers
-#        run: |
-#          sudo docker stop $(sudo docker ps -a -q) || true
-#          sudo docker rm $(sudo docker ps -a -q) || true
-#
-#      - name: Prune Docker system
-#        run: |
-#          sudo docker system prune -f
-#
-#      - name: create env file
-#        run: |
-#          echo "${{ secrets.ENV_FILE }}" > .env
-#
-#      - name: Build and run Docker container
-#        run: |
-#          sudo docker build -t gestao-eventos .
-#          sudo docker run -d -p 80:80 gestao-eventos
+      - name: Stop and remove old containers
+        run: |
+          sudo docker stop $(sudo docker ps -a -q) || true
+          sudo docker rm $(sudo docker ps -a -q) || true
+
+      - name: Prune Docker system
+        run: |
+          sudo docker system prune -f
+
+      - name: create env file
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > .env
+
+      - name: Build and run Docker container
+        run: |
+          sudo docker build -t gestao-eventos .
+          sudo docker run -d -p 80:80 gestao-eventos
