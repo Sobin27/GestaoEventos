@@ -18,6 +18,10 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 
+      - name: Authenticate Docker to Artifact Registry
+        run: |
+          gcloud auth configure-docker southamerica-east1-docker.pkg.dev
+
       - name: Create env file
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
@@ -34,5 +38,5 @@ jobs:
           gcloud run deploy gestao-eventos \
           --image $IMAGE \
           --platform managed \
-          --region southamerica-east1 \
+          --region us-central1 \
           --allow-unauthenticated
