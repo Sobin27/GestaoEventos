@@ -25,7 +25,7 @@ class UserController extends Controller
     {
         try {
             return $this->response(
-                message: 'User created successfully deployed deu bom',
+                message: 'User created successfully',
                 data: $this->userCreateService->createUser($request),
                 code: 201
             );
