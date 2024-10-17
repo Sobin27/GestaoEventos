@@ -39,4 +39,5 @@ jobs:
           --image $IMAGE \
           --platform managed \
           --region southamerica-east1 \
-          --allow-unauthenticated
+          --allow-unauthenticated \
+          --port 80
